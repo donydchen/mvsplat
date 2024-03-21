@@ -102,11 +102,11 @@ More running commands can be found at [more_commands.sh](more_commands.sh).
 ## BibTeX
 
 ```
-@inproceedings{chen2024mvsplat,
-      title={MVSplat: Efficient 3D Gaussian Splatting from Sparse Multi-View Images},
-      author={Chen, Yuedong and Xu, Haofei and Zheng, Chuanxia and Zhuang, Bohan and Pollefeys, Marc and Geiger, Andreas and Cham, Tat-Jen and Cai, Jianfei},
-      journal={arXiv},
-      year={2024},
+@article{chen2024mvsplat,
+    title     = {MVSplat: Efficient 3D Gaussian Splatting from Sparse Multi-View Images},
+    author    = {Chen, Yuedong and Xu, Haofei and Zheng, Chuanxia and Zhuang, Bohan and Pollefeys, Marc and Geiger, Andreas and Cham, Tat-Jen and Cai, Jianfei},
+    journal   = {arXiv},
+    year      = {2024},
 }
 ```
 
