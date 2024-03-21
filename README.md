@@ -4,8 +4,7 @@ This is the official implementation of **MVSplat: Efficient 3D Gaussian Splattin
 
 ### [Project Page](https://donydchen.github.io/mvsplat/) | [arXiv](https://donydchen.github.io/mvsplat/) | [Pretrained Models](https://drive.google.com/drive/folders/14_E_5R6ojOWnLSrSVLVEMHnTiKsfddjU) 
 
-
-
+https://github.com/donydchen/mvsplat/assets/5866866/22460f87-fc6b-45ae-b76e-143121d16fce
 
 
 ## Installation
@@ -98,7 +97,7 @@ wandb.name=abl/re10k_base \
 model.encoder.wo_depth_refine=true 
 ```
 
-Model running commands can be found at [more_commands.sh](more_commands.sh).
+More running commands can be found at [more_commands.sh](more_commands.sh).
 
 ## BibTeX
 
