@@ -1,0 +1,25 @@
+defaults:
+  - dataset: re10k
+  - model/encoder: epipolar
+  - loss: []
+  - optional dataset/view_sampler_dataset_specific_config: ${dataset/view_sampler}_${dataset}
+  - override dataset/view_sampler: evaluation
+
+data_loader:
+  train:
+    num_workers: 0
+    persistent_workers: true
+    batch_size: 1
+    seed: 1234
+  test:
+    num_workers: 4
+    persistent_workers: false
+    batch_size: 1
+    seed: 2345
+  val:
+    num_workers: 0
+    persistent_workers: true
+    batch_size: 1
+    seed: 3456
+
+seed: 111123

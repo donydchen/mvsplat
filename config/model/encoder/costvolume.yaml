@@ -1,0 +1,42 @@
+name: costvolume
+
+opacity_mapping:
+  initial: 0.0
+  final: 0.0
+  warm_up: 1
+
+num_depth_candidates: 32
+num_surfaces: 1
+
+gaussians_per_pixel: 1
+
+gaussian_adapter:
+  gaussian_scale_min: 0.5
+  gaussian_scale_max: 15.0
+  sh_degree: 4
+
+d_feature: 128
+
+visualizer:
+  num_samples: 8
+  min_resolution: 256
+  export_ply: false
+
+# params for multi-view depth predictor
+unimatch_weights_path: "checkpoints/gmdepth-scale1-resumeflowthings-scannet-5d9d7964.pth"
+multiview_trans_attn_split: 2
+costvolume_unet_feat_dim: 128
+costvolume_unet_channel_mult: [1,1,1]
+costvolume_unet_attn_res: []
+depth_unet_feat_dim: 64
+depth_unet_attn_res: []
+depth_unet_channel_mult: [1, 1, 1]
+downscale_factor: 4
+shim_patch_size: 4
+
+# below are ablation settings, keep them as false for default model
+wo_depth_refine: false         # Table 3: base
+wo_cost_volume: false          # Table 3: w/o cost volume
+wo_backbone_cross_attn: false  # Table 3: w/o cross-view attention
+wo_cost_volume_refine: false   # Table 3: w/o U-Net
+use_epipolar_trans: false      # Table B: w/ Epipolar Transformer

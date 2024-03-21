@@ -1,0 +1,35 @@
+# @package _global_
+
+dataset:
+  view_sampler:
+    index_path: assets/evaluation_index_re10k.json
+
+evaluation:
+  methods:
+    - name: Ours
+      key: ours
+      path: baselines/re10k/ours/frames
+    - name: No Epipolar
+      key: no_epipolar
+      path: baselines/re10k/re10k_ablation_no_epipolar_transformer/frames
+    - name: No Sampling
+      key: no_sampling
+      path: baselines/re10k/re10k_ablation_no_probabilistic_sampling/frames
+    - name: No Depth Enc.
+      key: no_depth_encoding
+      path: baselines/re10k/re10k_ablation_no_depth_encoding/frames
+    - name: Depth Reg.
+      key: depth_regularization
+      path: baselines/re10k/re10k_depth_loss/frames
+
+  side_by_side_path: null
+  animate_side_by_side: false
+  highlighted:
+    - scene: 67a69088a2695987
+      target_index: 74
+    - scene: e4f4574df7938f37
+      target_index: 26
+    - scene: 29e0bfbad00f0d5e
+      target_index: 89
+
+output_metrics_path: baselines/re10k/evaluation_metrics_ablation.json

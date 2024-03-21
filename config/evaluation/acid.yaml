@@ -1,0 +1,51 @@
+# @package _global_
+
+dataset:
+  view_sampler:
+    index_path: assets/evaluation_index_acid.json
+
+evaluation:
+  methods:
+    - name: Ours
+      key: ours
+      path: baselines/acid/ours/frames
+    - name: Du et al.~\cite{du2023cross}
+      key: du2023
+      path: baselines/acid/yilun/frames
+    - name: GPNR~\cite{suhail2022generalizable}
+      key: gpnr
+      path: baselines/acid/gpnr/frames
+    - name: pixelNeRF~\cite{pixelnerf}
+      key: pixelnerf
+      path: baselines/acid/pixelnerf/frames
+
+  side_by_side_path: null
+  animate_side_by_side: false
+  highlighted:
+    # Main Paper
+    # - scene: 405dcfc20f9ba5cb
+    #   target_index: 60
+    # - scene: 23bb6c5d93c40e13
+    #   target_index: 38
+    # - scene: a5ab552ede3e70a0
+    #   target_index: 52
+    # Supplemental
+    - scene: b896ebcbe8d18553
+      target_index: 61
+    - scene: bfbb8ec94454b84f
+      target_index: 89
+    - scene: c124e820e8123518
+      target_index: 111
+    - scene: c06467006ab8705a
+      target_index: 24
+    - scene: d4c545fb5fa1a84a
+      target_index: 23
+    - scene: d8f7d9ef3a5a4527
+      target_index: 138
+    - scene: 4139c1649bcce55a
+      target_index: 140
+    # No Space
+    # - scene: 20c3d098e3b28058
+    #   target_index: 360
+
+output_metrics_path: baselines/acid/evaluation_metrics.json

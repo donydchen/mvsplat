@@ -1,0 +1,49 @@
+# @package _global_
+
+dataset:
+  view_sampler:
+    index_path: assets/evaluation_index_re10k.json
+
+evaluation:
+  methods:
+    - name: Ours
+      key: ours
+      path: baselines/re10k/ours/frames
+    - name: Du et al.~\cite{du2023cross}
+      key: du2023
+      path: baselines/re10k/yilun/frames
+    - name: GPNR~\cite{suhail2022generalizable}
+      key: gpnr
+      path: baselines/re10k/gpnr/frames
+    - name: pixelNeRF~\cite{pixelnerf}
+      key: pixelnerf
+      path: baselines/re10k/pixelnerf/frames
+
+  side_by_side_path: null
+  animate_side_by_side: false
+  highlighted:
+    # Main Paper
+    - scene: 5be4f1f46b408d68
+      target_index: 136
+    - scene: 800ea72b6988f63e
+      target_index: 167
+    - scene: d3a01038c5f21473
+      target_index: 201
+    # Supplemental
+    # - scene: 9e585ebbacb3e94c
+    #   target_index: 80
+    # - scene: 7a00ed342b630d31
+    #   target_index: 101
+    # - scene: 6f243139ca86b4e5
+    #   target_index: 54
+    # - scene: 6e77ac6af5163f5b
+    #   target_index: 153
+    # - scene: 5fbace6c6ca56228
+    #   target_index: 33
+    # - scene: 7a34348316608aee
+    #   target_index: 80
+    # - scene: 7a911883348688e9
+    #   target_index: 88
+    
+
+output_metrics_path: baselines/re10k/evaluation_metrics.json

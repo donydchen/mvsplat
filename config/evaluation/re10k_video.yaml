@@ -1,0 +1,26 @@
+# @package _global_
+
+dataset:
+  view_sampler:
+    index_path: assets/evaluation_index_re10k_video.json
+
+evaluation:
+  methods:
+    - name: Ours
+      key: ours
+      path: baselines/re10k/ours/frames_video
+    - name: Du et al.
+      key: du2023
+      path: baselines/re10k/yilun/frames_video
+    - name: GPNR
+      key: gpnr
+      path: baselines/re10k/gpnr/frames_video
+    - name: pixelNeRF
+      key: pixelnerf
+      path: baselines/re10k/pixelnerf/frames_video
+
+  side_by_side_path: outputs/video/re10k
+  animate_side_by_side: true
+  highlighted: []
+
+output_metrics_path: outputs/video/re10k/evaluation_metrics.json

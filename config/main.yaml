@@ -1,0 +1,69 @@
+defaults:
+  - dataset: re10k
+  - optional dataset/view_sampler_dataset_specific_config: ${dataset/view_sampler}_${dataset}
+  - model/encoder: costvolume
+  - model/decoder: splatting_cuda
+  - loss: [mse]
+
+wandb:
+  project: mvsplat
+  entity: placeholder
+  name: placeholder
+  mode: disabled
+  id: null
+
+mode: train
+
+dataset:
+  overfit_to_scene: null
+
+data_loader:
+  # Avoid having to spin up new processes to print out visualizations.
+  train:
+    num_workers: 10
+    persistent_workers: true
+    batch_size: 4
+    seed: 1234
+  test:
+    num_workers: 4
+    persistent_workers: false
+    batch_size: 1
+    seed: 2345
+  val:
+    num_workers: 1
+    persistent_workers: true
+    batch_size: 1
+    seed: 3456
+
+optimizer:
+  lr: 1.5e-4
+  warm_up_steps: 2000
+  cosine_lr: false
+
+checkpointing:
+  load: null
+  every_n_train_steps: 20000  # 5000
+  save_top_k: -1
+  pretrained_model: null
+
+train:
+  depth_mode: null
+  extended_visualization: false
+  print_log_every_n_steps: 1
+
+test:
+  output_path: outputs/test
+  compute_scores: false
+  eval_time_skip_steps: 0
+  save_image: true
+  save_video: false
+
+seed: 111123
+
+trainer:
+  max_steps: -1
+  val_check_interval: 0.5
+  gradient_clip_val: 0.5
+  num_sanity_val_steps: 2
+
+output_dir: null
