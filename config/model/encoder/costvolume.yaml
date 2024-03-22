@@ -23,7 +23,7 @@ visualizer:
   export_ply: false
 
 # params for multi-view depth predictor
-unimatch_weights_path: "checkpoints/gmdepth-scale1-resumeflowthings-scannet-5d9d7964.pth"
+unimatch_weights_path: null  # "checkpoints/gmdepth-scale1-resumeflowthings-scannet-5d9d7964.pth"
 multiview_trans_attn_split: 2
 costvolume_unet_feat_dim: 128
 costvolume_unet_channel_mult: [1,1,1]

@@ -78,7 +78,8 @@ Run the following:
 # download the backbone pretrained weight from unimath and save to 'checkpoints/'
 wget 'https://s3.eu-central-1.amazonaws.com/avg-projects/unimatch/pretrained/gmdepth-scale1-resumeflowthings-scannet-5d9d7964.pth' -P checkpoints
 # train mvsplat
-python -m src.main +experiment=re10k data_loader.train.batch_size=14
+python -m src.main +experiment=re10k data_loader.train.batch_size=14 \
+model.encoder.unimatch_weights_path=checkpoints/gmdepth-scale1-resumeflowthings-scannet-5d9d7964.pth
 ```
 
 Our models are trained with a single A100 (80GB) GPU. They can also be trained on multiple GPUs with smaller RAM by setting a smaller `data_loader.train.batch_size` per GPU.
