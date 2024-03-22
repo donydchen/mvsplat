@@ -1,6 +1,8 @@
 # MVSplat
 
-This is the official implementation of **MVSplat: Efficient 3D Gaussian Splatting from Sparse Multi-View Images** by [Yuedong Chen](https://donydchen.github.io/), [Haofei Xu](https://haofeixu.github.io/), [Chuanxia Zheng](https://chuanxiaz.com/), [Bohan Zhuang](https://bohanzhuang.github.io/), [Marc Pollefeys](https://people.inf.ethz.ch/marc.pollefeys/), [Andreas Geiger](https://www.cvlibs.net/), [Tat-Jen Cham](https://personal.ntu.edu.sg/astjcham/), and [Jianfei Cai](https://jianfei-cai.github.io/).
+Official implementation of **MVSplat: Efficient 3D Gaussian Splatting from Sparse Multi-View Images**
+
+Authors: [Yuedong Chen](https://donydchen.github.io/), [Haofei Xu](https://haofeixu.github.io/), [Chuanxia Zheng](https://chuanxiaz.com/), [Bohan Zhuang](https://bohanzhuang.github.io/), [Marc Pollefeys](https://people.inf.ethz.ch/marc.pollefeys/), [Andreas Geiger](https://www.cvlibs.net/), [Tat-Jen Cham](https://personal.ntu.edu.sg/astjcham/) and [Jianfei Cai](https://jianfei-cai.github.io/).
 
 ### [Project Page](https://donydchen.github.io/mvsplat/) | [arXiv](https://arxiv.org/abs/2403.14627) | [Pretrained Models](https://drive.google.com/drive/folders/14_E_5R6ojOWnLSrSVLVEMHnTiKsfddjU) 
 
@@ -19,17 +21,17 @@ pip install -r requirements.txt
 
 ## Acquiring Datasets
 
-MVSplat utilises the same dataset settings as pixelSplat. Below we quote pixelSplat's [detailed instructions](https://github.com/dcharatan/pixelsplat?tab=readme-ov-file#acquiring-datasets) on getting datasets.
+Our MVSplat uses the same training datasets as pixelSplat. Below we quote pixelSplat's [detailed instructions](https://github.com/dcharatan/pixelsplat?tab=readme-ov-file#acquiring-datasets) on getting datasets.
 
 > pixelSplat was trained using versions of the RealEstate10k and ACID datasets that were split into ~100 MB chunks for use on server cluster file systems. Small subsets of the Real Estate 10k and ACID datasets in this format can be found [here](https://drive.google.com/drive/folders/1joiezNCyQK2BvWMnfwHJpm2V77c7iYGe?usp=sharing). To use them, simply unzip them into a newly created `datasets` folder in the project root directory.
 
 > If you would like to convert downloaded versions of the Real Estate 10k and ACID datasets to our format, you can use the [scripts here](https://github.com/dcharatan/real_estate_10k_tools). Reach out to us (pixelSplat) if you want the full versions of our processed datasets, which are about 500 GB and 160 GB for Real Estate 10k and ACID respectively.
 
-## Run the Code
+## Running the Code
 
 ### Evaluation
 
-To render frames and compute scores from an existing checkpoint,
+To render novel views and compute evaluation metrics from a pretrained model,
 
 * get the [pretrained models](https://drive.google.com/drive/folders/14_E_5R6ojOWnLSrSVLVEMHnTiKsfddjU), and save them to `/checkpoints`
 
@@ -79,7 +81,7 @@ wget 'https://s3.eu-central-1.amazonaws.com/avg-projects/unimatch/pretrained/gmd
 python -m src.main +experiment=re10k data_loader.train.batch_size=14
 ```
 
-The setting requires a single GPU with 80 GB of VRAM (A100). Set a smaller `data_loader.train.batch_size` to reduce memory usage.
+Our models are trained with a single A100 (80GB) GPU. They can also be trained on multiple GPUs with smaller RAM by setting a smaller `data_loader.train.batch_size` per GPU.
 
 ### Ablations
 
