@@ -1,6 +1,6 @@
 # MVSplat
 
-This is the official implementation of **MVSplat: Efficient 3D Gaussian Splatting from Sparse Multi-View Images** by Yuedong Chen, Haofei Xu, Chuanxia Zheng, Bohan Zhuang, Marc Pollefeys, Andreas Geiger, Tat-Jen Cham, and Jianfei Cai.
+This is the official implementation of **MVSplat: Efficient 3D Gaussian Splatting from Sparse Multi-View Images** by [Yuedong Chen](https://donydchen.github.io/), [Haofei Xu](https://haofeixu.github.io/), [Chuanxia Zheng](https://chuanxiaz.com/), [Bohan Zhuang](https://bohanzhuang.github.io/), [Marc Pollefeys](https://people.inf.ethz.ch/marc.pollefeys/), [Andreas Geiger](https://www.cvlibs.net/), [Tat-Jen Cham](https://personal.ntu.edu.sg/astjcham/), and [Jianfei Cai](https://jianfei-cai.github.io/).
 
 ### [Project Page](https://donydchen.github.io/mvsplat/) | [arXiv](https://arxiv.org/abs/2403.14627) | [Pretrained Models](https://drive.google.com/drive/folders/14_E_5R6ojOWnLSrSVLVEMHnTiKsfddjU) 
 
@@ -8,7 +8,7 @@ https://github.com/donydchen/mvsplat/assets/5866866/c5dc5de1-819e-462f-85a2-815e
 
 ## Installation
 
-To get started, create a conda virtual environment using Python 3.10+ and install requirements:
+To get started, create a conda virtual environment using Python 3.10+ and install the requirements:
 
 ```bash
 conda create -n mvsplat python=3.10
