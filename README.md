@@ -2,7 +2,7 @@
 
 This is the official implementation of **MVSplat: Efficient 3D Gaussian Splatting from Sparse Multi-View Images** by Yuedong Chen, Haofei Xu, Chuanxia Zheng, Bohan Zhuang, Marc Pollefeys, Andreas Geiger, Tat-Jen Cham, and Jianfei Cai.
 
-### [Project Page](https://donydchen.github.io/mvsplat/) | [arXiv](https://donydchen.github.io/mvsplat/) | [Pretrained Models](https://drive.google.com/drive/folders/14_E_5R6ojOWnLSrSVLVEMHnTiKsfddjU) 
+### [Project Page](https://donydchen.github.io/mvsplat/) | [arXiv](https://arxiv.org/abs/2403.14627) | [Pretrained Models](https://drive.google.com/drive/folders/14_E_5R6ojOWnLSrSVLVEMHnTiKsfddjU) 
 
 https://github.com/donydchen/mvsplat/assets/5866866/c5dc5de1-819e-462f-85a2-815e239d8ff2
 
@@ -100,11 +100,11 @@ More running commands can be found at [more_commands.sh](more_commands.sh).
 
 ## BibTeX
 
-```
+```bibtex
 @article{chen2024mvsplat,
     title   = {MVSplat: Efficient 3D Gaussian Splatting from Sparse Multi-View Images},
     author  = {Chen, Yuedong and Xu, Haofei and Zheng, Chuanxia and Zhuang, Bohan and Pollefeys, Marc and Geiger, Andreas and Cham, Tat-Jen and Cai, Jianfei},
-    journal = {arXiv},
+    journal = {arXiv preprint arXiv:2403.14627},
     year    = {2024},
 }
 ```
