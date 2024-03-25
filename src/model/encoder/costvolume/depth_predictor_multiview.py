@@ -87,14 +87,23 @@ def prepare_feat_proj_data_lists(
 
         # calculate reference pose
         # NOTE: not efficient, but clearer for now
-        cur_ref_pose_to_v0_list = []
-        for v0, v1 in zip(init_view_order, cur_view_order):
-            cur_ref_pose_to_v0_list.append(
-                extrinsics[:, v1].clone().detach().inverse()
-                @ extrinsics[:, v0].clone().detach()
-            )
-        cur_ref_pose_to_v0s = torch.cat(cur_ref_pose_to_v0_list, dim=0)  # (vxb c h w)
-        pose_curr_lists.append(cur_ref_pose_to_v0s)
+        if v > 2:
+            cur_ref_pose_to_v0_list = []
+            for v0, v1 in zip(init_view_order, cur_view_order):
+                cur_ref_pose_to_v0_list.append(
+                    extrinsics[:, v1].clone().detach().inverse()
+                    @ extrinsics[:, v0].clone().detach()
+                )
+            cur_ref_pose_to_v0s = torch.cat(cur_ref_pose_to_v0_list, dim=0)  # (vxb c h w)
+            pose_curr_lists.append(cur_ref_pose_to_v0s)
+    
+    # get 2 views reference pose
+    # NOTE: do it in such a way to reproduce the exact same value as reported in paper
+    if v == 2:
+        pose_ref = extrinsics[:, 0].clone().detach()
+        pose_tgt = extrinsics[:, 1].clone().detach()
+        pose = pose_tgt.inverse() @ pose_ref
+        pose_curr_lists = [torch.cat((pose, pose.inverse()), dim=0),]
 
     # unnormalized camera intrinsic
     intr_curr = intrinsics[:, :, :3, :3].clone().detach()  # [b, v, 3, 3]

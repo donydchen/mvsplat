@@ -36,9 +36,9 @@ data_loader:
     seed: 3456
 
 optimizer:
-  lr: 1.5e-4
+  lr: 2.e-4
   warm_up_steps: 2000
-  cosine_lr: false
+  cosine_lr: true
 
 checkpointing:
   load: null

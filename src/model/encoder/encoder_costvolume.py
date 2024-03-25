@@ -85,21 +85,22 @@ class EncoderCostVolume(Encoder[EncoderCostVolumeCfg]):
             use_epipolar_trans=cfg.use_epipolar_trans,
         )
         ckpt_path = cfg.unimatch_weights_path
-        if cfg.unimatch_weights_path is None:
-            print("==> Train multi-view transformer backbone from scratch")
-        else:
-            print("==> Load multi-view transformer backbone checkpoint: %s" % ckpt_path)
-            unimatch_pretrained_model = torch.load(ckpt_path)["model"]
-            updated_state_dict = OrderedDict(
-                {
-                    k: v
-                    for k, v in unimatch_pretrained_model.items()
-                    if k in self.backbone.state_dict()
-                }
-            )
-            # NOTE: when wo cross attn, we added ffns into self-attn, but they have no pretrained weight
-            is_strict_loading = not cfg.wo_backbone_cross_attn
-            self.backbone.load_state_dict(updated_state_dict, strict=is_strict_loading)
+        if get_cfg().mode == 'train':
+            if cfg.unimatch_weights_path is None:
+                print("==> Init multi-view transformer backbone from scratch")
+            else:
+                print("==> Load multi-view transformer backbone checkpoint: %s" % ckpt_path)
+                unimatch_pretrained_model = torch.load(ckpt_path)["model"]
+                updated_state_dict = OrderedDict(
+                    {
+                        k: v
+                        for k, v in unimatch_pretrained_model.items()
+                        if k in self.backbone.state_dict()
+                    }
+                )
+                # NOTE: when wo cross attn, we added ffns into self-attn, but they have no pretrained weight
+                is_strict_loading = not cfg.wo_backbone_cross_attn
+                self.backbone.load_state_dict(updated_state_dict, strict=is_strict_loading)
 
         # gaussians convertor
         self.gaussian_adapter = GaussianAdapter(cfg.gaussian_adapter)
