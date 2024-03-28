@@ -177,3 +177,4 @@ table.tex
 /baselines
 /test/*
 point_clouds*
+assets/*_3views.json
