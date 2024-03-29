@@ -84,24 +84,21 @@ class BackboneMultiview(torch.nn.Module):
         return (images - mean) / std
 
     def extract_feature(self, images):
-        batch_size, n_img, c, h, w = images.shape
-        concat = images.reshape(batch_size*n_img, c, h, w)  # [nB, C, H, W]
+        b, v = images.shape[:2]
+        concat = rearrange(images, "b v c h w -> (b v) c h w")
+
         # list of [nB, C, H, W], resolution from high to low
         features = self.backbone(concat)
-
         if not isinstance(features, list):
             features = [features]
-
         # reverse: resolution from low to high
         features = features[::-1]
 
-        features_list = [[] for _ in range(n_img)]
-
-        for i in range(len(features)):
-            feature = features[i]
-            chunks = torch.chunk(feature, n_img, 0)  # tuple
-            for idx, chunk in enumerate(chunks):
-                features_list[idx].append(chunk)
+        features_list = [[] for _ in range(v)]
+        for feature in features:
+            feature = rearrange(feature, "(b v) c h w -> b v c h w", b=b, v=v)
+            for idx in range(v):
+                features_list[idx].append(feature[:, idx])
 
         return features_list
 
