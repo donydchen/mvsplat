@@ -18,8 +18,8 @@ def rotate_sh(
     alpha, beta, gamma = matrix_to_angles(rotations)
     result = []
     for degree in range(isqrt(n)):
-        with torch.device(device):
-            sh_rotations = wigner_D(degree, alpha, beta, gamma).type(dtype)
+        # with torch.device(device):
+        sh_rotations = wigner_D(degree, alpha, beta, gamma).type(dtype)
         sh_rotated = einsum(
             sh_rotations,
             sh_coefficients[..., degree**2 : (degree + 1) ** 2],

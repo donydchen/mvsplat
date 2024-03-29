@@ -128,7 +128,7 @@ class DepthPredictorMultiView(nn.Module):
         costvolume_unet_attn_res=(),
         gaussian_raw_channels=-1,
         gaussians_per_pixel=1,
-        num_views=2,
+        num_views=3,
         depth_unet_feat_dim=64,
         depth_unet_attn_res=(),
         depth_unet_channel_mult=(1, 1, 1),

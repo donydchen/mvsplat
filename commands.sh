@@ -2,14 +2,20 @@
 
 # --- Ablation Models ---
 
-# Table 3: base
-python -m src.main +experiment=re10k \
-checkpointing.load=checkpoints/ablations/re10k_worefine.ckpt \
+#shell for test
+CUDA_VISIBLE_DEVICES=1 ~/miniconda/envs/splat/bin/python -m src.main +experiment=replica \
+checkpointing.load=outputs/2024-03-28/22-48-03/checkpoints/step2000.ckpt \
 mode=test \
 dataset/view_sampler=evaluation \
-test.compute_scores=true \
-wandb.name=abl/re10k_base \
-model.encoder.wo_depth_refine=true 
+test.compute_scores=true 
+
+#shell for train
+CUDA_VISIBLE_DEVICES=1 ~/miniconda/envs/splat/bin/python -m src.main +experiment=replica \
+checkpointing.load=outputs/2024-03-28/22-48-03/checkpoints/step2000.ckpt \
+mode=train \
+data_loader.train.batch_size=1
+
+
 
 # Table 3: w/o cost volume
 python -m src.main +experiment=re10k \

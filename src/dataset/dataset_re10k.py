@@ -188,7 +188,7 @@ class DatasetRE10k(IterableDataset):
                         "far": self.get_bound("far", len(target_indices)) / nf_scale,
                         "index": target_indices,
                     },
-                    "scene": scene,
+                    "": scene,
                 }
                 if self.stage == "train" and self.cfg.augment:
                     example = apply_augmentation_shim(example)

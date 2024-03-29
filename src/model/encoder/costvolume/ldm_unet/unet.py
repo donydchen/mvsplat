@@ -323,7 +323,7 @@ class AttentionBlock(nn.Module):
         use_new_attention_order=False,
         postnorm=False,
         channels_per_group=None,
-        num_frames=2,
+        num_frames=5,
         use_cross_view_self_attn=False,
     ):
         super().__init__()
@@ -529,7 +529,7 @@ class QKVAttentionLegacy(nn.Module):
     A module which performs QKV attention. Matches legacy QKVAttention + input/ouput heads shaping
     """
 
-    def __init__(self, n_heads, n_frames=2, use_cross_view_self_attn=False):
+    def __init__(self, n_heads, n_frames=5, use_cross_view_self_attn=False):
         super().__init__()
         self.n_heads = n_heads
         self.n_frames = n_frames
@@ -674,7 +674,7 @@ class UNetModel(nn.Module):
         condition_num_views=3,
         no_self_attn=False,
         conv_kernel_size=3,
-        num_frames=2,
+        num_frames=3,
         use_cross_view_self_attn=False,
     ):
         super().__init__()

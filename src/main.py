@@ -117,7 +117,7 @@ def train(cfg_dict: DictConfig):
         num_sanity_val_steps=cfg.trainer.num_sanity_val_steps,
     )
     torch.manual_seed(cfg_dict.seed + trainer.global_rank)
-
+    
     encoder, encoder_visualizer = get_encoder(cfg.model.encoder)
 
     model_wrapper = ModelWrapper(
@@ -137,6 +137,52 @@ def train(cfg_dict: DictConfig):
         global_rank=trainer.global_rank,
     )
 
+    # 检查load的ckpt是否保存优化器状态
+    ckpt = torch.load(checkpoint_path)
+    if not 'optimizer_states' in ckpt :
+        model = ModelWrapper(
+            cfg.optimizer,
+            cfg.test,
+            cfg.train,
+            encoder,
+            encoder_visualizer,
+            get_decoder(cfg.model.decoder, cfg.dataset),
+            get_losses(cfg.loss),
+            step_tracker
+        )
+        model2 = ModelWrapper(
+            cfg.optimizer,
+            cfg.test,
+            cfg.train,
+            encoder,
+            encoder_visualizer,
+            get_decoder(cfg.model.decoder, cfg.dataset),
+            get_losses(cfg.loss),
+            step_tracker
+        )
+
+        ckpt_saved = torch.load("outputs/2024-03-26/10-49-14/checkpoints/step60000.ckpt")
+        model.load_state_dict(ckpt_saved['state_dict'], strict=False)
+        optimizer_state_dict = ckpt_saved['optimizer_states'][0]  # 选择第一个优化器状态
+        scheduler_state_dict = ckpt_saved['lr_schedulers'][0]  # 选择第一个学习率调度器状态
+
+        model2.load_state_dict(ckpt['state_dict'], strict=False)
+
+        # 将第一个ckpt文件中的优化器状态和学习率调度器状态加载到第二个模型中
+        optimizer = torch.optim.Adam(model2.parameters(), lr=0.001)  # 重新创建优化器
+        optimizer.load_state_dict(optimizer_state_dict)
+        model2.optimizer = optimizer
+
+        model2_state_dict = model2.state_dict()
+        checkpoint = {
+            'state_dict': model2_state_dict,
+            'optimizer_states': [model2.optimizer.state_dict()],
+            'lr_schedulers': [scheduler_state_dict],
+            'pytorch-lightning_version': '2.0.0'
+        }
+
+        torch.save(checkpoint, checkpoint_path)
+
     if cfg.mode == "train":
         trainer.fit(model_wrapper, datamodule=data_module, ckpt_path=checkpoint_path)
     else:
@@ -149,6 +195,5 @@ def train(cfg_dict: DictConfig):
 
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
-    torch.set_float32_matmul_precision('high')
-
+    # torch.set_float32_matmul_precision('high')
     train()

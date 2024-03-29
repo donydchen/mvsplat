@@ -1,5 +1,5 @@
 defaults:
-  - dataset: re10k
+  - dataset: replica
   - optional dataset/view_sampler_dataset_specific_config: ${dataset/view_sampler}_${dataset}
   - model/encoder: costvolume
   - model/decoder: splatting_cuda
@@ -7,15 +7,16 @@ defaults:
 
 wandb:
   project: mvsplat
-  entity: placeholder
-  name: placeholder
+  entity: 2053238694
+  name: mvsplat
   mode: disabled
   id: null
 
-mode: train
+mode: train 
 
 dataset:
   overfit_to_scene: null
+  # scene: ["bed"]
 
 data_loader:
   # Avoid having to spin up new processes to print out visualizations.
@@ -42,7 +43,7 @@ optimizer:
 
 checkpointing:
   load: null
-  every_n_train_steps: 20000  # 5000
+  every_n_train_steps: 2000  # 5000
   save_top_k: -1
   pretrained_model: null
 
