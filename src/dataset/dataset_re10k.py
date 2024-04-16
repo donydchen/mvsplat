@@ -31,6 +31,7 @@ class DatasetRE10kCfg(DatasetCfgCommon):
     augment: bool
     test_len: int
     test_chunk_interval: int
+    test_times_per_scene: int
     skip_bad_shape: bool = True
     near: float = -1.0
     far: float = -1.0
@@ -113,9 +114,16 @@ class DatasetRE10k(IterableDataset):
             if self.stage in (("train", "val") if self.cfg.shuffle_val else ("train")):
                 chunk = self.shuffle(chunk)
 
-            for example in chunk:
+            # for example in chunk:
+            times_per_scene = self.cfg.test_times_per_scene
+            for run_idx in range(int(times_per_scene * len(chunk))):
+                example = chunk[run_idx // times_per_scene]
+
                 extrinsics, intrinsics = self.convert_poses(example["cameras"])
-                scene = example["key"]
+                if times_per_scene > 1:  # specifically for DTU
+                    scene = f"{example['key']}_{(run_idx % times_per_scene):02d}"
+                else:
+                    scene = example["key"]
 
                 try:
                     context_indices, target_indices = self.view_sampler.sample(
@@ -265,7 +273,8 @@ class DatasetRE10k(IterableDataset):
 
     def __len__(self) -> int:
         return (
-            min(len(self.index.keys()), self.cfg.test_len)
+            min(len(self.index.keys()) *
+                self.cfg.test_times_per_scene, self.cfg.test_len)
             if self.stage == "test" and self.cfg.test_len > 0
-            else len(self.index.keys())
+            else len(self.index.keys()) * self.cfg.test_times_per_scene
         )

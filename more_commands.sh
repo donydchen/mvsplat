@@ -1,6 +1,67 @@
 #!/usr/bin/env bash
 
-# --- Ablation Models ---
+# In this file, we provide commands to get the quantitative results presented in the MVSplat paper.
+# Commands are provided by following the order of Tables appearing in the paper.
+
+
+# --------------- Default Final Models ---------------
+
+# Table 1: re10k
+python -m src.main +experiment=re10k \
+checkpointing.load=checkpoints/re10k.ckpt \
+mode=test \
+dataset/view_sampler=evaluation \
+test.compute_scores=true
+
+# Table 1: acid
+python -m src.main +experiment=acid \
+checkpointing.load=checkpoints/acid.ckpt \
+mode=test \
+dataset/view_sampler=evaluation \
+dataset.view_sampler.index_path=assets/evaluation_index_acid.json \
+test.compute_scores=true
+
+# generate video
+python -m src.main +experiment=re10k \
+checkpointing.load=checkpoints/re10k.ckpt \
+mode=test \
+dataset/view_sampler=evaluation \
+dataset.view_sampler.index_path=assets/evaluation_index_re10k_video.json \
+test.save_video=true \
+test.save_image=false \
+test.compute_scores=false
+
+
+# --------------- Cross-Dataset Generalization ---------------
+
+# Table 2: RealEstate10K -> ACID
+python -m src.main +experiment=acid \
+checkpointing.load=checkpoints/re10k.ckpt \
+mode=test \
+dataset/view_sampler=evaluation \
+dataset.view_sampler.index_path=assets/evaluation_index_acid.json \
+test.compute_scores=true
+
+# Table 2: RealEstate10K -> DTU (2 context views)
+python -m src.main +experiment=dtu \
+checkpointing.load=checkpoints/re10k.ckpt \
+mode=test \
+dataset/view_sampler=evaluation \
+dataset.view_sampler.index_path=assets/evaluation_index_dtu_nctx2.json \
+test.compute_scores=true
+
+# RealEstate10K -> DTU (3 context views)
+python -m src.main +experiment=dtu \
+checkpointing.load=checkpoints/re10k.ckpt \
+mode=test \
+dataset/view_sampler=evaluation \
+dataset.view_sampler.index_path=assets/evaluation_index_dtu_nctx3.json \
+dataset.view_sampler.num_context_views=3 \
+wandb.name=dtu/views3 \
+test.compute_scores=true
+
+
+# --------------- Ablation Models ---------------
 
 # Table 3: base
 python -m src.main +experiment=re10k \
@@ -75,30 +136,3 @@ mode=test \
 dataset/view_sampler=evaluation \
 test.compute_scores=true \
 wandb.name=abl/re10k_wo_pretrained_450k 
-
-# --- Default Final Models ---
-
-# Table 1: re10k
-python -m src.main +experiment=re10k \
-checkpointing.load=checkpoints/re10k.ckpt \
-mode=test \
-dataset/view_sampler=evaluation \
-test.compute_scores=true
-
-# Table 1: acid
-python -m src.main +experiment=acid \
-checkpointing.load=checkpoints/acid.ckpt \
-mode=test \
-dataset/view_sampler=evaluation \
-dataset.view_sampler.index_path=assets/evaluation_index_acid.json \
-test.compute_scores=true
-
-# generate video
-python -m src.main +experiment=re10k \
-checkpointing.load=checkpoints/re10k.ckpt \
-mode=test \
-dataset/view_sampler=evaluation \
-dataset.view_sampler.index_path=assets/evaluation_index_re10k_video.json \
-test.save_video=true \
-test.save_image=false \
-test.compute_scores=false

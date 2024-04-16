@@ -20,3 +20,4 @@ baseline_scale_bounds: true
 shuffle_val: true
 test_len: -1
 test_chunk_interval: 1
+test_times_per_scene: 1

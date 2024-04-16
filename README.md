@@ -21,11 +21,19 @@ pip install -r requirements.txt
 
 ## Acquiring Datasets
 
+### RealEstate10K and ACID
+
 Our MVSplat uses the same training datasets as pixelSplat. Below we quote pixelSplat's [detailed instructions](https://github.com/dcharatan/pixelsplat?tab=readme-ov-file#acquiring-datasets) on getting datasets.
 
 > pixelSplat was trained using versions of the RealEstate10k and ACID datasets that were split into ~100 MB chunks for use on server cluster file systems. Small subsets of the Real Estate 10k and ACID datasets in this format can be found [here](https://drive.google.com/drive/folders/1joiezNCyQK2BvWMnfwHJpm2V77c7iYGe?usp=sharing). To use them, simply unzip them into a newly created `datasets` folder in the project root directory.
 
 > If you would like to convert downloaded versions of the Real Estate 10k and ACID datasets to our format, you can use the [scripts here](https://github.com/dcharatan/real_estate_10k_tools). Reach out to us (pixelSplat) if you want the full versions of our processed datasets, which are about 500 GB and 160 GB for Real Estate 10k and ACID respectively.
+
+### DTU (For Testing Only)
+
+* Download the preprocessed DTU data [dtu_training.rar](https://drive.google.com/file/d/1eDjh-_bxKKnEuz5h-HXS7EDJn59clx6V/view).
+* Convert DTU to chunks by running `python src/scripts/convert_dtu.py --input_dir PATH_TO_DTU --output_dir datasets/dtu`
+* [Optional] Generate the evaluation index by running `python src/scripts/generate_dtu_evaluation_index.py --n_contexts=N`, where N is the number of context views. (For N=2 and N=3, we have already provided our tested version under `/assets`.)
 
 ## Running the Code
 
@@ -98,7 +106,21 @@ wandb.name=abl/re10k_base \
 model.encoder.wo_depth_refine=true 
 ```
 
-More running commands can be found at [more_commands.sh](more_commands.sh).
+### Cross-Dataset Generalization
+
+We use the default model trained on RealEstate10K to conduct cross-dataset evalutions. To evaluate them, *e.g.*, on DTU, run the following command
+
+```bash
+# Table 2: RealEstate10K -> DTU
+python -m src.main +experiment=dtu \
+checkpointing.load=checkpoints/re10k.ckpt \
+mode=test \
+dataset/view_sampler=evaluation \
+dataset.view_sampler.index_path=assets/evaluation_index_dtu_nctx2.json \
+test.compute_scores=true
+```
+
+**More running commands can be found at [more_commands.sh](more_commands.sh).**
 
 ## BibTeX
 
