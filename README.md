@@ -83,7 +83,7 @@ test.compute_scores=false
 Run the following:
 
 ```bash
-# download the backbone pretrained weight from unimath and save to 'checkpoints/'
+# download the backbone pretrained weight from unimatch and save to 'checkpoints/'
 wget 'https://s3.eu-central-1.amazonaws.com/avg-projects/unimatch/pretrained/gmdepth-scale1-resumeflowthings-scannet-5d9d7964.pth' -P checkpoints
 # train mvsplat
 python -m src.main +experiment=re10k data_loader.train.batch_size=14
