@@ -1,16 +1,31 @@
-# MVSplat
-
-Official implementation of **MVSplat: Efficient 3D Gaussian Splatting from Sparse Multi-View Images**
-
-Authors: [Yuedong Chen](https://donydchen.github.io/), [Haofei Xu](https://haofeixu.github.io/), [Chuanxia Zheng](https://chuanxiaz.com/), [Bohan Zhuang](https://bohanzhuang.github.io/), [Marc Pollefeys](https://people.inf.ethz.ch/marc.pollefeys/), [Andreas Geiger](https://www.cvlibs.net/), [Tat-Jen Cham](https://personal.ntu.edu.sg/astjcham/) and [Jianfei Cai](https://jianfei-cai.github.io/).
-
-### [Project Page](https://donydchen.github.io/mvsplat/) | [arXiv](https://arxiv.org/abs/2403.14627) | [Pretrained Models](https://drive.google.com/drive/folders/14_E_5R6ojOWnLSrSVLVEMHnTiKsfddjU) 
+<p align="center">
+  <h1 align="center">MVSplat: Efficient 3D Gaussian Splatting <br> from Sparse Multi-View Images</h1>
+  <p align="center">
+    <a href="https://donydchen.github.io/">Yuedong Chen</a>
+    &nbsp;·&nbsp;
+    <a href="https://haofeixu.github.io/">Haofei Xu</a>
+    &nbsp;·&nbsp;
+    <a href="https://chuanxiaz.com/">Chuanxia Zheng</a>
+    &nbsp;·&nbsp;
+    <a href="https://bohanzhuang.github.io/">Bohan Zhuang</a> <br>
+    <a href="https://people.inf.ethz.ch/marc.pollefeys/">Marc Pollefeys</a>
+    &nbsp;·&nbsp;
+    <a href="http://www.cvlibs.net/">Andreas Geiger</a>
+    &nbsp;·&nbsp;
+    <a href="https://personal.ntu.edu.sg/astjcham/">Tat-Jen Cham</a>
+    &nbsp;·&nbsp;
+    <a href="https://jianfei-cai.github.io/">Jianfei Cai</a>
+  </p>
+  <h3 align="center">ECCV 2024</h3>
+  <h3 align="center"><a href="https://arxiv.org/abs/2403.14627">Paper</a> | <a href="https://donydchen.github.io/mvsplat/">Project Page</a> | <a href="https://drive.google.com/drive/folders/14_E_5R6ojOWnLSrSVLVEMHnTiKsfddjU">Pretrained Models</a> </h3>
+  <div align="center"></div>
+</p>
 
 https://github.com/donydchen/mvsplat/assets/5866866/c5dc5de1-819e-462f-85a2-815e239d8ff2
 
 ## Installation
 
-To get started, create a conda virtual environment using Python 3.10+ and install the requirements:
+To get started, clone this project, create a conda virtual environment using Python 3.10+, and install the requirements:
 
 ```bash
 git clone https://github.com/donydchen/mvsplat.git
@@ -123,7 +138,7 @@ model.encoder.wo_depth_refine=true
 
 ### Cross-Dataset Generalization
 
-We use the default model trained on RealEstate10K to conduct cross-dataset evalutions. To evaluate them, *e.g.*, on DTU, run the following command
+We use the default model trained on RealEstate10K to conduct cross-dataset evaluations. To evaluate them, *e.g.*, on DTU, run the following command
 
 ```bash
 # Table 2: RealEstate10K -> DTU
