@@ -264,5 +264,6 @@ def render_depth_cuda(
         repeat(fake_color, "b g -> b g c ()", c=3),
         gaussian_opacities,
         scale_invariant=scale_invariant,
+        use_sh=False,
     )
     return result.mean(dim=1)
