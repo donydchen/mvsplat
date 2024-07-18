@@ -66,5 +66,6 @@ trainer:
   val_check_interval: 0.5
   gradient_clip_val: 0.5
   num_sanity_val_steps: 2
+  num_nodes: 1
 
 output_dir: null

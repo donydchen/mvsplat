@@ -109,8 +109,38 @@ python -m src.main +experiment=re10k data_loader.train.batch_size=14
 Our models are trained with a single A100 (80GB) GPU. They can also be trained on multiple GPUs with smaller RAM by setting a smaller `data_loader.train.batch_size` per GPU.
 
 <details>
-  <summary><b>Fine-tune from the released weights</b></summary>
-To fine-tune from the released weights <i>without</i> loading the optimizer states (e.g., https://github.com/donydchen/mvsplat/issues/45), run the following:
+  <summary><b>Training on multiple nodes (https://github.com/donydchen/mvsplat/issues/32)</b></summary>
+Since this project is built on top of pytorch_lightning, it can be trained on multiple nodes hosted on the SLURM cluster. For example, to train on 2 nodes (with 2 GPUs on each node), add the following lines to the SLURM job script
+
+```bash
+#SBATCH --nodes=2           # should match with trainer.num_nodes
+#SBATCH --gres=gpu:2        # gpu per node
+#SBATCH --ntasks-per-node=2
+
+# optional, for debugging
+export NCCL_DEBUG=INFO
+export HYDRA_FULL_ERROR=1
+# optional, set network interface, obtained from ifconfig
+export NCCL_SOCKET_IFNAME=[YOUR NETWORK INTERFACE]
+# optional, set IB GID index
+export NCCL_IB_GID_INDEX=3
+
+# run the command with 'srun'
+srun python -m src.main +experiment=re10k \
+data_loader.train.batch_size=4 \
+trainer.num_nodes=2
+```
+
+References:
+* [Pytorch Lightning: RUN ON AN ON-PREM CLUSTER (ADVANCED)](https://lightning.ai/docs/pytorch/stable/clouds/cluster_advanced.html)
+* [NCCL: How to set NCCL_SOCKET_IFNAME](https://github.com/NVIDIA/nccl/issues/286)
+* [NCCL: NCCL WARN NET/IB](https://github.com/NVIDIA/nccl/issues/426)
+
+</details>
+
+<details>
+  <summary><b>Fine-tune from the released weights (https://github.com/donydchen/mvsplat/issues/45)</b></summary>
+To fine-tune from the released weights <i>without</i> loading the optimizer states, run the following:
 
 ```bash
 python -m src.main +experiment=re10k data_loader.train.batch_size=14 \
@@ -119,7 +149,6 @@ checkpointing.resume=false
 ```
 
 </details>
-
 
 ### Ablations
 
