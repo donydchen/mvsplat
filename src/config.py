@@ -18,6 +18,7 @@ class CheckpointingCfg:
     every_n_train_steps: int
     save_top_k: int
     pretrained_model: Optional[str]
+    resume: Optional[bool] = True
 
 
 @dataclass

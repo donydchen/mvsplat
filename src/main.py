@@ -120,16 +120,25 @@ def train(cfg_dict: DictConfig):
 
     encoder, encoder_visualizer = get_encoder(cfg.model.encoder)
 
-    model_wrapper = ModelWrapper(
-        cfg.optimizer,
-        cfg.test,
-        cfg.train,
-        encoder,
-        encoder_visualizer,
-        get_decoder(cfg.model.decoder, cfg.dataset),
-        get_losses(cfg.loss),
-        step_tracker
-    )
+    model_kwargs = {
+        "optimizer_cfg": cfg.optimizer,
+        "test_cfg": cfg.test,
+        "train_cfg": cfg.train,
+        "encoder": encoder,
+        "encoder_visualizer": encoder_visualizer,
+        "decoder": get_decoder(cfg.model.decoder, cfg.dataset),
+        "losses": get_losses(cfg.loss),
+        "step_tracker": step_tracker,
+    }
+    if cfg.mode == "train" and checkpoint_path is not None and not cfg.checkpointing.resume:
+        # Just load model weights, without optimizer states
+        # e.g., fine-tune from the released weights on other datasets
+        model_wrapper = ModelWrapper.load_from_checkpoint(
+            checkpoint_path, **model_kwargs, strict=True)
+        print(cyan(f"Loaded weigths from {checkpoint_path}."))
+    else:
+        model_wrapper = ModelWrapper(**model_kwargs)
+
     data_module = DataModule(
         cfg.dataset,
         cfg.data_loader,
@@ -138,7 +147,8 @@ def train(cfg_dict: DictConfig):
     )
 
     if cfg.mode == "train":
-        trainer.fit(model_wrapper, datamodule=data_module, ckpt_path=checkpoint_path)
+        trainer.fit(model_wrapper, datamodule=data_module, ckpt_path=(
+            checkpoint_path if cfg.checkpointing.resume else None))
     else:
         trainer.test(
             model_wrapper,

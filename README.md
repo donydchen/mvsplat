@@ -13,6 +13,8 @@ https://github.com/donydchen/mvsplat/assets/5866866/c5dc5de1-819e-462f-85a2-815e
 To get started, create a conda virtual environment using Python 3.10+ and install the requirements:
 
 ```bash
+git clone https://github.com/donydchen/mvsplat.git
+cd mvsplat
 conda create -n mvsplat python=3.10
 conda activate mvsplat
 pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu118
@@ -90,6 +92,19 @@ python -m src.main +experiment=re10k data_loader.train.batch_size=14
 ```
 
 Our models are trained with a single A100 (80GB) GPU. They can also be trained on multiple GPUs with smaller RAM by setting a smaller `data_loader.train.batch_size` per GPU.
+
+<details>
+  <summary><b>Fine-tune from the released weights</b></summary>
+To fine-tune from the released weights <i>without</i> loading the optimizer states (e.g., https://github.com/donydchen/mvsplat/issues/45), run the following:
+
+```bash
+python -m src.main +experiment=re10k data_loader.train.batch_size=14 \
+checkpointing.load=checkpoints/re10k.ckpt \
+checkpointing.resume=false
+```
+
+</details>
+
 
 ### Ablations
 
