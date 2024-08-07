@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 ## Installation with uv
 
-Alternative, you can use `uv` (https://github.com/astral-sh/uv) tool:
+Alternatively, one could use `uv` (https://github.com/astral-sh/uv) tool:
 ```bash
 git clone https://github.com/donydchen/mvsplat.git
 cd mvsplat
