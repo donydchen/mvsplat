@@ -16,9 +16,16 @@
     &nbsp;·&nbsp;
     <a href="https://jianfei-cai.github.io/">Jianfei Cai</a>
   </p>
-  <h3 align="center">ECCV 2024</h3>
+  <h3 align="center">ECCV 2024 Oral</h3>
   <h3 align="center"><a href="https://arxiv.org/abs/2403.14627">Paper</a> | <a href="https://donydchen.github.io/mvsplat/">Project Page</a> | <a href="https://drive.google.com/drive/folders/14_E_5R6ojOWnLSrSVLVEMHnTiKsfddjU">Pretrained Models</a> </h3>
-  <div align="center"></div>
+  <div align="center">
+    <a href="https://news.ycombinator.com/item?id=41222655">
+      <img
+        alt="Featured on Hacker News"
+        src="https://hackerbadge.vercel.app/api?id=41222655&type=dark"
+      />
+    </a>
+  </div>
 </p>
 
 https://github.com/donydchen/mvsplat/assets/5866866/c5dc5de1-819e-462f-85a2-815e239d8ff2
