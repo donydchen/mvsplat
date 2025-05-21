@@ -28,9 +28,9 @@
   </div> -->
 
 <ul>
-<li><b>20/01/25 Update:</b> Check out Cheng's <a href="https://github.com/chengzhag/PanSplat">PanSplat</a>, which extends MVSplat to higher resolutions (up to 4K) and highlights the use of a hierarchical spherical cost volume and two-step deferred backpropagation for memory-efficient training. </li>
+<li><b>20/01/25 Update:</b> Check out Cheng's <a href="https://github.com/chengzhag/PanSplat">PanSplat [CVPR '25]</a>, which extends MVSplat to higher resolutions (up to 4K) and highlights the use of a hierarchical spherical cost volume and two-step deferred backpropagation for memory-efficient training. </li>
 <li><b>08/11/24 Update:</b> Explore our <a href="https://github.com/donydchen/mvsplat360">MVSplat360 [NeurIPS '24]</a>, an upgraded MVSplat that combines video diffusion to achieve 360° NVS for large-scale scenes from just 5 input views! </li>  
-<li><b>21/10/24 Update:</b> Check out Haofei's <a href="https://github.com/cvg/depthsplat">DepthSplat</a> if you are interested in feed-forward 3DGS on more complex scenes (DL3DV-10K) and more input views (up to 12 views)!</li>
+<li><b>21/10/24 Update:</b> Check out Haofei's <a href="https://github.com/cvg/depthsplat">DepthSplat [CVPR '25]</a> if you are interested in feed-forward 3DGS on more complex scenes (DL3DV-10K) and more input views (up to 12 views)!</li>
 </ul>
 <br>
 </p>
