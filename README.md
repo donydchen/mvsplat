@@ -37,7 +37,7 @@
 
 https://github.com/donydchen/mvsplat/assets/5866866/c5dc5de1-819e-462f-85a2-815e239d8ff2
 
-## Installation
+## Installation with conda
 
 To get started, clone this project, create a conda virtual environment using Python 3.10+, and install the requirements:
 
@@ -48,6 +48,19 @@ conda create -n mvsplat python=3.10
 conda activate mvsplat
 pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
+```
+
+## Installation with uv
+
+Alternatively, one could use `uv` (https://github.com/astral-sh/uv) tool:
+```bash
+git clone https://github.com/donydchen/mvsplat.git
+cd mvsplat
+pip install uv
+uv venv
+source .venv/bin/activate
+uv pip install torch torchvision torchaudio
+uv pip install --no-build-isolation -r requirements.txt
 ```
 
 ## Acquiring Datasets
