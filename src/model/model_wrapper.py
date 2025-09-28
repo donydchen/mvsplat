@@ -354,11 +354,11 @@ class ModelWrapper(LightningModule):
             ).items():
                 self.logger.log_image(k, [prep_image(image)], step=self.global_step)
 
-        # Run video validation step.
-        self.render_video_interpolation(batch)
-        self.render_video_wobble(batch)
-        if self.train_cfg.extended_visualization:
-            self.render_video_interpolation_exaggerated(batch)
+        # Run video validation step - temporarily disabled for custom dataset
+         #self.render_video_interpolation(batch)
+        #self.render_video_wobble(batch)
+        #if self.train_cfg.extended_visualization:
+        #    self.render_video_interpolation_exaggerated(batch)
 
     @rank_zero_only
     def render_video_wobble(self, batch: BatchedExample) -> None:

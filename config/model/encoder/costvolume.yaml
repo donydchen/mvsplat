@@ -11,8 +11,8 @@ num_surfaces: 1
 gaussians_per_pixel: 1
 
 gaussian_adapter:
-  gaussian_scale_min: 0.5
-  gaussian_scale_max: 15.0
+  gaussian_scale_min: 0.1
+  gaussian_scale_max: 5.0
   sh_degree: 4
 
 d_feature: 128

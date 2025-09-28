@@ -1,0 +1,4 @@
+# @package _global_
+
+# No additional configuration needed for custom dataset with 'all' view sampler
+# since view sampling is handled internally by the custom dataset

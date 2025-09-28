@@ -6,10 +6,10 @@ defaults:
   - loss: [mse]
 
 wandb:
-  project: mvsplat
-  entity: placeholder
-  name: placeholder
-  mode: disabled
+  project: mvsplat_2
+  entity: eifelnex-t-bingen-ai-center
+  name: MVsplatTEST
+  mode: online
   id: null
 
 mode: train
@@ -63,9 +63,9 @@ seed: 111123
 
 trainer:
   max_steps: -1
-  val_check_interval: 0.5
+  val_check_interval: 8
   gradient_clip_val: 0.5
-  num_sanity_val_steps: 2
+  num_sanity_val_steps: 0
   num_nodes: 1
 
 output_dir: null

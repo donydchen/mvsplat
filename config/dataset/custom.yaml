@@ -1,0 +1,36 @@
+defaults:
+  - view_sampler: custom_passthrough
+
+name: custom
+dataset_path: "E:/dataset"
+data_df_path: "E:/dataset/_metadata/data_df.csv"
+
+# Required fields matching RE10K structure
+image_shape: [256, 256]
+background_color: [1.0, 1.0, 1.0]
+cameras_are_circular: false
+
+# Custom dataset specific parameters
+train_ratio: 0.8
+val_ratio: 0.2
+random_seed: 400
+group_by_scene: true
+n_step_state: 1
+n_step_predict: 0
+n_views_context: 2
+n_views_target: 1
+original_image_size: [2448, 2048]
+temporal_sampling: "sequential"
+max_temporal_gap: 10
+verbose: false
+view_sampler_strategy: "random"  # Options: "random", "group", "all", "frustum_overlap"
+near: 0.8
+far: 1.9
+
+# Parameters from re10k for proper training
+baseline_epsilon: 1e-3
+max_fov: 30.0
+skip_bad_shape: true
+augment: false
+make_baseline_1: false
+baseline_scale_bounds: false

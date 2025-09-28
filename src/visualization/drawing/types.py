@@ -10,7 +10,9 @@ Real = Union[float, int]
 Vector = Union[
     Real,
     Iterable[Real],
+    Shaped[Tensor, "2"],
     Shaped[Tensor, "3"],
+    Shaped[Tensor, "batch 2"],
     Shaped[Tensor, "batch 3"],
 ]
 

@@ -16,7 +16,7 @@ max_fov: 100.0
 skip_bad_shape: true
 near: -1.
 far: -1.
-baseline_scale_bounds: true
+baseline_scale_bounds: false
 shuffle_val: true
 test_len: -1
 test_chunk_interval: 1

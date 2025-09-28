@@ -14,7 +14,7 @@ data_loader:
     batch_size: 14
 
 trainer:
-  max_steps: 300_001
+  max_steps: 3_000
 
 # ----- Additional params for default best model customization
 model:
